@@ -1,0 +1,24 @@
+version: '3.8'
+
+volumes:
+  db-data:
+
+services:
+  # node,nuxt(front)
+  front:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    command: yarn dev
+    volumes:
+      - ./src:/app
+      - ./app/node_modules
+    ports:
+      - '$FRONT_PORT:3000'
+      - '$STORYBOOK_PORT:6006'
+    init: true
+    restart: on-failure
+
+networks:
+  docker-line-spa:
+    external: true

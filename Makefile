@@ -11,9 +11,6 @@ restart:
 
 # docker-all-delete
 delete:
-	docker stop $(docker ps -q)
-	docker rm $(docker ps -q -a)
-	docker rmi $(docker images -q)
 	docker network prune
 	docker volume rm `docker volume ls -q -f dangling=true`
 
